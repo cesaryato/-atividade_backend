@@ -1,0 +1,15 @@
+body {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        margin: 0;
+    }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+h2 {
+    flex-direction: column;
+}
