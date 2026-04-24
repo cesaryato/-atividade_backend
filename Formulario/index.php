@@ -58,24 +58,22 @@ $resultLista = pg_query($conn, $queryLista);
     <link rel="stylesheet" href="style.css">
     <title>Atividade</title>
 </head>
-<body>
-    <div class="input-group">
-        <h2>Cadastro do Usuario</h2>
-        <p>Preencha os dados abaixo</p>
-        <form method= "post" action="">
-            <input type="text" name="nome" placeholder="Digite seu nome" >
-            <br>
-            <br>
-        <input type="text" name="email" placeholder="Digite seu e-mail" >
-        <br>
-        <br>
-        <input type="text" name="telefone" placeholder="Digite seu telefone" >
-        <br>
-        <br>
-        <button type="submit"> Confirmar</button>
+ <div class="container">
+    <h1>Cadastro de Usuário</h1>
+    <p>Preencha os dados abaixo.</p>
+
+    <form method="POST" action="">
+      <label for="nome">Nome:</label><br>
+      <input type="text" id="nome" name="nome" required value="<?php echo htmlspecialchars($nome); ?>">
+
+      <label for="email">E-mail:</label><br>
+      <input type="email" id="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
+
+      <label for="telefone">Telefone:</label><br>
+      <input type="text" id="telefone" name="telefone" required value="<?php echo htmlspecialchars($telefone); ?>">
+
+      <button type="submit">Cadastrar</button>
     </form>
-     <h2>Resultado</h2>
-  <div id="resultado"> 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
@@ -85,11 +83,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Dados recebidos: nome = " . htmlspecialchars($nome) . 
         ", E-mail = " . htmlspecialchars($email) .
         ", telefone = " . htmlspecialchars($telefone);
-
 }
-
             ?>
          </div>
     </div>
+    <?php if ($resultLista && pg_num_rows($resultLista) > 0): ?>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($usuario = pg_fetch_assoc($resultLista)): ?>
+            <tr>
+              <td><?php echo htmlspecialchars($usuario["id"]); ?></td>
+              <td><?php echo htmlspecialchars($usuario["nome"]); ?></td>
+              <td><?php echo htmlspecialchars($usuario["email"]); ?></td>
+              <td><?php echo htmlspecialchars($usuario["telefone"]); ?></td>
+            </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    <?php else: ?>
+      <p class="sem-registros">Nenhum usuário cadastrado.</p>
+    <?php endif; ?>
 </body>
 </html>
