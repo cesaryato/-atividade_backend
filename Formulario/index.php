@@ -88,7 +88,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
     </div>
     <?php endif; ?>
+
     <h2 style="margin-top: 35px;">Usuários cadastrados</h2>
+
     <?php if ($resultLista && pg_num_rows($resultLista) > 0): ?>
       <table>
         <thead>
