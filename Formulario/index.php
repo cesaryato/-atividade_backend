@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($nome === "" || $email === "" || $telefone === "") {
         $mensagem = "Preencha todos os campos.";
         $tipoMensagem = "erro";
-    } elseif ($filter_var($email, FILTER_VALID_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $mensagem = "Digite um e-mail válido.";
         $tipoMensagem = "erro";
     } else{
