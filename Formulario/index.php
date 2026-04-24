@@ -13,7 +13,7 @@ if (!$db_url) {
 $conn = pg_connect($db_url);
 
 if (!$conn) {
-    die("Erro ao conectar no banco de dados")
+    die("Erro ao conectar no banco de dados");
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
